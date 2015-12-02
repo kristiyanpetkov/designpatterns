@@ -1,24 +1,33 @@
 package com.clouway.abstractfactory;
 
+import java.util.Scanner;
+
 /**
  * @author Slavi Dichkov (slavidichkof@gmail.com)
  */
 public class Demo {
     public static void main(String[] args) {
-        House forestHouse=new ForestHouse();
-        Door door=forestHouse.getDoor();
-        Floor floor=forestHouse.getFloor();
-        Window window=forestHouse.getWindow();
-        door.howHealthyIsDoor();
-        floor.howHealthyIsFloor();
-        window.howHealthyIsWindow();
+        House house=null;
 
-        House cityHouse=new CityHouse();
-        Door door1=cityHouse.getDoor();
-        Floor floor1=cityHouse.getFloor();
-        Window window1=cityHouse.getWindow();
-        door1.howHealthyIsDoor();
-        floor1.howHealthyIsFloor();
-        window1.howHealthyIsWindow();
+        Scanner scanner=new Scanner(System.in);
+        String chose=scanner.nextLine();
+
+        if (chose.equals("forest house")){
+            house=new ForestHouse();
+        }else if(chose.equals("city house")){
+            house=new CityHouse();
+        }
+
+        if (house!=null){
+            Door door=house.getDoor();
+            Floor floor=house.getFloor();
+            Window window=house.getWindow();
+            door.howHealthyIsDoor();
+            floor.howHealthyIsFloor();
+            window.howHealthyIsWindow();
+        }else {
+            System.out.println("there is not such house");
+        }
+
     }
 }
