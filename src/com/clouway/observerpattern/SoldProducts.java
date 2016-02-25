@@ -17,7 +17,7 @@ public class SoldProducts implements ProductChangeListener {
 
     @Override
     public void addProduct(Product product) {
-    soldProducts.remove(product);
+//    soldProducts.remove(product);
     }
 
     public List<Product> getSoldProducts(){
