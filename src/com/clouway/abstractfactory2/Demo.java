@@ -10,14 +10,8 @@ public class Demo {
         AbstractHousePartFactory woodFactory = new WoodFactory();
 
         Door door = pvcFactory.createDoor();
-        door.produce();
-
         Window window = woodFactory.createWindow();
-        window.produce();
-
         Floor floor = woodFactory.createFloor();
-        floor.produce();
-
 
 
     }
