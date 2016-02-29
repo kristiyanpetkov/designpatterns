@@ -8,32 +8,39 @@ import java.util.List;
  */
 public abstract class ObjectPool<T> {
     private List<T> available = new ArrayList<>();
-    private List<T> inUse = new ArrayList<>();
+    private List<T> locked = new ArrayList<>();
+    private int maxInstance;
+
+    public ObjectPool(int maxInstance) {
+        this.maxInstance = maxInstance;
+
+    }
 
     protected abstract T create();
 
     public synchronized T acquire() {
-        if (available.size() > 0) {
+        if (!available.isEmpty()) {
             T instance = available.iterator().next();
-            inUse.add(instance);
+            locked.add(instance);
             available.remove(instance);
             return instance;
-        } else if (available.size() + inUse.size() <= 9) {
+        } else if (locked.size() <= maxInstance) {
             T instance = create();
-            inUse.add(instance);
+            locked.add(instance);
             return instance;
-        } else {
-            throw new NoFreeResourceException();
         }
+        throw new NoFreeResourceException();
     }
 
     public synchronized void release(T instance) {
-        available.add(instance);
-        inUse.remove(instance);
+        if (!locked.isEmpty()) {
+            available.add(instance);
+            locked.remove(instance);
+        }
     }
 
     @Override
     public String toString() {
-        return String.format("Pool available=%d inUse=%d", available.size(), inUse.size());
+        return String.format("Pool available=%d locked=%d", available.size(), locked.size());
     }
 }

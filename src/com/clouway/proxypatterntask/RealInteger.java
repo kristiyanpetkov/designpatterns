@@ -4,14 +4,14 @@ package com.clouway.proxypatterntask;
  * Created by clouway on 16-2-3.
  */
 public class RealInteger implements Integer {
-    private int a;
+    private int value;
 
-    public RealInteger(int a){
-        this.a=a;
+    public RealInteger(int value){
+        this.value = value;
     }
 
     @Override
     public void display() {
-        System.out.println(a);
+        System.out.println(value);
     }
 }
