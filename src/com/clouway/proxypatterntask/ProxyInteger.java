@@ -6,17 +6,13 @@ package com.clouway.proxypatterntask;
 public class ProxyInteger implements Integer {
 
     private RealInteger realInteger;
-    private int value;
 
     public ProxyInteger(int value){
-        this.value = value;
+       this.realInteger= new RealInteger(value);
     }
 
     @Override
     public void display() {
-        if(realInteger==null){
-            realInteger=new RealInteger(value);
-        }
         realInteger.display();
     }
 }
