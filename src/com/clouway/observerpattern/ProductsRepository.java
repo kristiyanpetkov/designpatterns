@@ -10,30 +10,31 @@ import java.util.Map;
  */
 public class ProductsRepository implements ProductChangeListener {
 
-   private Map<Product,Integer> avaibleProducts = new HashMap<Product,Integer>();
-
+    private Map<Product, Integer> avaibleProducts = new HashMap<Product, Integer>();
 
 
     public void addProduct(Product product) {
-       if(avaibleProducts.containsKey(product)){
-           avaibleProducts.put(product,avaibleProducts.get(product)+1);
-       }else {
-           avaibleProducts.put(product, 1);
-       }
+        if (avaibleProducts.containsKey(product)) {
+            avaibleProducts.put(product, avaibleProducts.get(product) + 1);
+        } else {
+            avaibleProducts.put(product, 1);
+        }
     }
 
     @Override
     public void sellProduct(Product product) {
-        if(avaibleProducts.containsKey(product) && avaibleProducts.get(product)>0){
-            avaibleProducts.put(product,avaibleProducts.get(product)-1);
-        }else{
-           avaibleProducts.remove(product);
-            throw new RuntimeException("Product out of order!");
+        if (avaibleProducts.containsKey(product) && avaibleProducts.get(product) > 0) {
+            avaibleProducts.put(product, avaibleProducts.get(product) - 1);
+            return;
         }
+
+        avaibleProducts.remove(product);
+        throw new RuntimeException("Product out of order!");
     }
 
-    public Map<Product,Integer> getAvaibleProducts(){
+    public Map<Product, Integer> getAvaibleProducts() {
         return avaibleProducts;
 
     }
+
 }

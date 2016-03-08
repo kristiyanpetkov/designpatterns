@@ -16,14 +16,14 @@ public class SoldProducts implements ProductChangeListener {
     public void sellProduct(Product product) {
         if (soldProducts.containsKey(product)) {
             soldProducts.put(product, soldProducts.get(product) + 1);
-        } else {
-            soldProducts.put(product, 1);
+            return;
         }
+        soldProducts.put(product, 1);
     }
 
     @Override
     public void addProduct(Product product) {
-        
+
     }
 
     public Map<Product, Integer> getSoldProducts() {
